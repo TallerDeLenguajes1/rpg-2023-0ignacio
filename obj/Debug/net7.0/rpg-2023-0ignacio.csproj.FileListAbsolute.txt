@@ -1,0 +1,15 @@
+C:\tpRPG\rpg-2023-0ignacio\bin\Debug\net7.0\rpg-2023-0ignacio.exe
+C:\tpRPG\rpg-2023-0ignacio\bin\Debug\net7.0\rpg-2023-0ignacio.deps.json
+C:\tpRPG\rpg-2023-0ignacio\bin\Debug\net7.0\rpg-2023-0ignacio.runtimeconfig.json
+C:\tpRPG\rpg-2023-0ignacio\bin\Debug\net7.0\rpg-2023-0ignacio.dll
+C:\tpRPG\rpg-2023-0ignacio\bin\Debug\net7.0\rpg-2023-0ignacio.pdb
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.csproj.AssemblyReference.cache
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.GeneratedMSBuildEditorConfig.editorconfig
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.AssemblyInfoInputs.cache
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.AssemblyInfo.cs
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.csproj.CoreCompileInputs.cache
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.dll
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\refint\rpg-2023-0ignacio.dll
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.pdb
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\rpg-2023-0ignacio.genruntimeconfig.cache
+C:\tpRPG\rpg-2023-0ignacio\obj\Debug\net7.0\ref\rpg-2023-0ignacio.dll
