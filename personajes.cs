@@ -1,7 +1,7 @@
 using System.Text.Json;
 namespace clasePersonajes
 {
-
+    //Estructura del personaje
     public class personaje
     {
         private string? tipo;
@@ -27,12 +27,12 @@ namespace clasePersonajes
         public int Hp { get => hp; set => hp = value; }
 
     }
-
+    //Clase para la creacion aleatoria de personajes
     public class FabricaDePersonajes
     {
         string[] tipos = { "Tanque", "Arquero", "Mago", "Apoyo", "Barbaro" };
         string[] names = { "Thomas", "Agustin", "Ignacio", "Omar", "Juan" };
-
+        //Metodo para cargar caracteristicas del personaje
         public personaje crearPersonaje()
         {
             personaje nuevo = new personaje();
@@ -54,25 +54,6 @@ namespace clasePersonajes
             nuevo.Fuerza = rnd.Next(1, 11);
 
             return nuevo;
-        }
-    }
-
-    public class personajesJson
-    {
-        public bool existeArchivo(string archivo)
-        {
-            return File.Exists(archivo);
-        }
-        public void guardarPjs(List<personaje> lista)
-        {
-            string contenidoJson = JsonSerializer.Serialize(lista);
-            File.WriteAllText("personajes.json", contenidoJson);
-        }
-        public List<personaje> leerPersonajes(string archivo)
-        {
-            string contenidoJson = File.ReadAllText(archivo);
-            List<personaje> listapersonajes = JsonSerializer.Deserialize<List<personaje>>(contenidoJson);
-            return listapersonajes;
         }
     }
 }
