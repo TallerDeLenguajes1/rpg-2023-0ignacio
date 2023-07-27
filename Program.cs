@@ -3,26 +3,36 @@ using System.Text.Json;
 using clasePersonajes;
 using clasesConsumoAPI;
 using PersonajesRyM;
-// See https://aka.ms/new-console-template for more information
-
-personaje nuevo;
-List<personaje> listaPjs = new List<personaje>();
-List<personaje> listaNueva = new List<personaje>();
-FabricaDePersonajes fp = new FabricaDePersonajes();
-
-if (PersonajesJson.existeArchivo("personajes.json"))
+internal class Program
 {
-    Console.WriteLine("La lista de personajes existe.");
-    Console.WriteLine("Personajes cargados.");
-    listaNueva = PersonajesJson.leerPersonajes("personajes.json");
-}else{
-    Console.WriteLine("La lista de personajes no existe, se creara una lista aleatoria.");
-    for (int i = 0; i < 10; i++)
+    private static void Main(string[] args)
     {
-        nuevo = fp.crearPersonaje();
-        listaPjs.Add(nuevo);
+        List<personaje> listaPjs = GenerarPjs();
     }
-    PersonajesJson.guardarPersonajes(listaPjs);
-}
 
-List<PersonajeRyM> ListaPjs = ConsumirAPI.GetApi();
+    public static List<personaje> GenerarPjs()
+    {
+        List<personaje> ListaPjs = new List<personaje>();
+
+        if (PersonajesJson.existeArchivo("personajes.json"))
+        {
+            Console.WriteLine("La lista de personajes existe.");
+            Console.WriteLine("Personajes cargados.");
+            ListaPjs = PersonajesJson.leerPersonajes("personajes.json");
+        }
+        else
+        {
+            FabricaDePersonajes fp = new FabricaDePersonajes();
+            personaje nuevo;
+            Console.WriteLine("La lista de personajes no existe, se creara una lista aleatoria.");
+            List<PersonajeRyM> ListaAux = ConsumirAPI.GetApi();
+            for (int i = 0; i < 7; i++)
+            {
+                nuevo = fp.crearPersonaje(ListaAux[i].Name, ListaAux[i].Species, ListaAux[i].Origin.Name);
+                ListaPjs.Add(nuevo);
+            }
+            PersonajesJson.guardarPersonajes(ListaPjs);
+        }
+        return ListaPjs;
+    }
+}
