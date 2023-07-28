@@ -35,16 +35,31 @@ namespace clasePersonajes
         {
             personaje nuevo = new personaje();
             Random rnd = new Random();
-            nuevo.Especie = speciesX;
+
+            if (speciesX == "Human")
+            {
+                nuevo.Especie = "Humano";
+            }else{
+                nuevo.Especie = "Alien";
+            }
+
+
+            if (originX == "unknown")
+            {
+                
+                nuevo.Origen = "Desconocido";
+            }else{
+                nuevo.Origen = originX;
+            }
+
             nuevo.Name = nameX;
-            nuevo.Origen = originX;
-            nuevo.Hp = 100;
-            if (nuevo.Especie == "Human")
+            
+            if (nuevo.Especie == "Humano")
             {
                 nuevo.Nivel = 5;
-            }else{
-                switch (nuevo.Name)
-                {
+            }else{                              
+                switch (nuevo.Name)                  
+                {                               //Determinar nivel de cada enemigo
                     case "Beebo":
                         nuevo.Nivel = 1;
                         break;
@@ -64,6 +79,8 @@ namespace clasePersonajes
                         break;
                 }
             }
+
+            nuevo.Hp = 100;
             nuevo.Arm = rnd.Next(1, 11);
             nuevo.Dest = rnd.Next(1, 6);
             nuevo.Vel = rnd.Next(1, 11);
@@ -71,7 +88,7 @@ namespace clasePersonajes
             return nuevo;
         }
 
-        public static List<personaje> GenerarPjs()
+        public static List<personaje> GenerarPjs()      //Metodo que verifica la existencia de archivo personajes.json, sino existe crea uno
         {
             List<personaje> ListaPjs = new List<personaje>();
 
@@ -79,20 +96,20 @@ namespace clasePersonajes
             {
                 Console.WriteLine("La lista de personajes existe.");
                 Console.WriteLine("Personajes cargados.");
-                ListaPjs = PersonajesJson.leerPersonajes("personajes.json");
+                ListaPjs = PersonajesJson.leerPersonajes("personajes.json");       //si existe lee el archivo de personajes
             }
             else
             {
                 FabricaDePersonajes fp = new FabricaDePersonajes();
                 personaje nuevo;
                 Console.WriteLine("La lista de personajes no existe, se creara una lista aleatoria.");
-                List<PersonajeRyM> ListaAux = ConsumirAPI.GetApi();
-                for (int i = 0; i < 7; i++)
+                List<PersonajeRyM> ListaAux = ConsumirAPI.GetApi();             //Consumo de api para obtener informacio de los personajes
+                for (int i = 0; i < 7; i++)                                     //Creacion de los personajes
                 {
                     nuevo = fp.crearPersonaje(ListaAux[i].Name, ListaAux[i].Species, ListaAux[i].Origin.Name);
                     ListaPjs.Add(nuevo);
                 }
-                PersonajesJson.guardarPersonajes(ListaPjs, "personajes.json");
+                PersonajesJson.guardarPersonajes(ListaPjs, "personajes.json");  //guardado de personajes en archivo personajes.json y creacion del mismo
             }
             return ListaPjs;
         }

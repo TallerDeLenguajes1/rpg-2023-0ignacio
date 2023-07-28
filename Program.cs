@@ -10,9 +10,9 @@ internal class Program
     {
         int aux = 0, resultado = 0;
         string? opcion;
-        List<personaje> listaPjs = FabricaDePersonajes.GenerarPjs();
+        List<personaje> listaPjs = FabricaDePersonajes.GenerarPjs();        //Inicializacion de personajes
 
-        do
+        do          //menu principal
         {
             if (resultado == 0)
             {
@@ -38,7 +38,7 @@ internal class Program
                 case 2:
                     if (resultado == 0)
                     {
-                        resultado = Juego(ref listaPjs);
+                        resultado = Juego(ref listaPjs);    //llamado del juego
                     }else{
                         Textos.MostrarEnemigos(listaPjs);
                         Textos.TeclaPasar();
@@ -67,7 +67,7 @@ internal class Program
             if (resultado == 0)         //control de estado de la partida
             {    
                 aux = 0;
-                aux = BatallaNivel(ref listaPjs, nivel, pj);
+                aux = BatallaNivel(ref listaPjs, nivel, pj);        //llamdo de batalla
                 
                 if (aux == 0)           //control de paso de nivel
                 {
@@ -75,9 +75,9 @@ internal class Program
                     Textos.TeclaPasar();
                     resultado = 2;
                 }else{
+                    nivel++;
                     if (nivel != 5)
                     {
-                        nivel++;
                         listaPjs[pj].Nivel++;
                         if (listaPjs[pj].Hp + 50 > 100)
                         {
@@ -93,7 +93,7 @@ internal class Program
                 return resultado;
             }
         } while (nivel < 6);
-        resultado = 1;
+        resultado = 1;          //1 significa que paso el juego
         return resultado;
     }
 
@@ -110,25 +110,21 @@ internal class Program
         
         Console.Clear();
         Console.WriteLine($"Batalla Nivel {Nivel}");
+        Console.WriteLine("=======================");
         Textos.MostrarPj(listaPjs, Pj);
         Textos.MostrarEnemigo(listaPjs, Nivel);
         Textos.TeclaPasar();
-        while (Personaje.Hp > 0 && Enemigo.Hp > 0)
+        while (Personaje.Hp > 0 && Enemigo.Hp > 0)          //Menu de batalla
         {
             defensaFlag = false;    //reseteo de defenseFlag
+
             Console.Clear();
-            Console.WriteLine($"Batalla Nivel {Nivel}");
-            Console.WriteLine("=======================");
-            Console.WriteLine($"{Personaje.Name} --- {Personaje.Hp}");
-            Console.WriteLine("\tVs");
-            Console.WriteLine($"{Enemigo.Name} --- {Enemigo.Hp}");
-            Console.WriteLine("=======================");
-            Textos.MenuBatalla();
+            Textos.MenuBatalla(listaPjs, Pj, Nivel);
             opcion = Console.ReadLine();
             int.TryParse(opcion, out accion);
             Console.Clear();
 
-            if (accion == 1)          //ejecucion de accion
+            if (accion == 1)          //ejecucion de accion atacar o defensa
             {
                 ataque = danio(Personaje, Enemigo);     //calculo de danio
                 Console.WriteLine($"Danio provocado al enemigo: {ataque}");
@@ -149,10 +145,10 @@ internal class Program
                 }
             }
 
-            if (defensaFlag == false)
+            if (defensaFlag == false)           // ataque enemigo si la defense fue fallida o no se eligio la accion defensa
             {
-                Console.WriteLine("=======================");
                 ataque = danio(Enemigo, Personaje);     //calculo de danio enemigo
+                Console.WriteLine("=======================");
                 Console.WriteLine($"Danio provocado por el enemigo: {ataque}");
                 if (Personaje.Hp - ataque >= 0)
                 {
@@ -167,7 +163,7 @@ internal class Program
         }
         listaPjs[Pj] = Personaje;
         listaPjs[Nivel+1] = Enemigo;
-        if (Personaje.Hp == 0)
+        if (Personaje.Hp == 0)          //1 si el personaje robrevivio al nivel
         {
             return 0;
         }else{
