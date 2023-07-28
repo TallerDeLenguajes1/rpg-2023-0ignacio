@@ -14,10 +14,10 @@ namespace datosJson
         {
             return File.Exists(archivo);
         }
-        public static void guardarPersonajes(List<personaje> lista)
+        public static void guardarPersonajes(List<personaje> lista, string archivo)
         {
             string contenidoJson = JsonSerializer.Serialize(lista);
-            File.WriteAllText("personajes.json", contenidoJson);
+            File.WriteAllText(archivo, contenidoJson);
         }
         public static List<personaje> leerPersonajes(string archivo)
         {
